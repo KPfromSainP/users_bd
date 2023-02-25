@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:alpine3.16
+    ports:
+      - "${POSTGRES_PORT:-5432}:${POSTGRES_PORT:-5432}"
+    volumes:
+      - "${POSTGRES_DATA:-./data/postgres/data}:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    command: "-p ${POSTGRES_PORT:-5432}"
+    restart: always
+
+  backend:
+    build: .
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    env_file:
+      - ".env"
+    restart: always
+    volumes:
+      - "./migrations/versions"
