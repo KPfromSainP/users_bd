@@ -1,11 +1,17 @@
-FROM python:slim
+FROM python:3.10
+
+WORKDIR /app
 
 COPY requirements.txt .
 
 RUN pip install --upgrade pip
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN /bin/sh -c pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 
 COPY . .
 
-CMD uvicorn main:app --port ${APP_PORT}
+COPY alembic.ini .
+
+COPY migrations migrations
+
+CMD python3 main.py
