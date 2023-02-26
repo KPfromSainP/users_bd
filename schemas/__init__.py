@@ -3,4 +3,12 @@ from .schemas import (
     BaseUser,
     UserCreate,
     UserUpdate,
+    BaseCar,
+    CarUpdate,
+    CarCreate,
+    CarInDB,
+    ManufacturerBase,
+    ManufacturerUpdate,
+    ManufacturerCreate,
+    ManufacturerInDB,
 )

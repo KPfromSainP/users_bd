@@ -13,6 +13,8 @@ services:
       PGDATA: "/var/lib/postgresql/data/pgdata"
     command: "-p ${POSTGRES_PORT:-5432}"
     restart: always
+    networks:
+      - backend_db_network
 
   backend:
     build: .
@@ -21,5 +23,9 @@ services:
     env_file:
       - ".env"
     restart: always
-    volumes:
-      - "./migrations/versions"
+    networks:
+      - backend_db_network
+
+networks:
+  backend_db_network:
+    driver: bridge

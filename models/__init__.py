@@ -1,1 +1,1 @@
-from .models import User, GenderEnum
+from .models import User, Car, Manufacturer, GenderEnum
