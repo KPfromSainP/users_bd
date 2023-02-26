@@ -14,4 +14,6 @@ COPY alembic.ini .
 
 COPY migrations migrations
 
+CMD alembic upgrade head
+
 CMD python3 main.py
